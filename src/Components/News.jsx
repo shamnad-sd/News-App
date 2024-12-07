@@ -3,14 +3,24 @@ import noImg from '../assets/images/no-img.png'
 import './News.css'
 import axios from 'axios'
 
-
+const Categories = [
+    'General',
+    'World',
+    'business',
+    'Technology',
+    'Entertainment',
+    'Sports',
+    'Health',
+    'Nation',
+    
+]
 
 
 const News = () => {
-
     const [headline , setHeadline]=useState(null)
-
     const [news,setNews]=useState([])
+
+    const [selectedCategory, setSelectedCategory]= useState ('General')
 
     useEffect(()=>{
         const fetchNews = async () => {
@@ -32,8 +42,8 @@ const News = () => {
 
         
 
-        fetchNews()
-    },[])
+        // fetchNews()
+    },[selectedCategory])
 
 
     return (
