@@ -2,16 +2,17 @@ import React, { useEffect, useState } from 'react'
 import noImg from '../assets/images/no-img.png'
 import './News.css'
 import axios from 'axios'
+import NewsModelBox from './NewsModelBox'
 
 const Categories = [
-    'General',
-    'World',
+    'general',
+    'world',
     'business',
-    'Technology',
-    'Entertainment',
-    'Sports',
-    'Health',
-    'Nation',
+    'technology',
+    'entertainment',
+    'sports',
+    'health',
+    'nation',
     
 ]
 
@@ -24,7 +25,7 @@ const News = () => {
 
     useEffect(()=>{
         const fetchNews = async () => {
-            const url ="https://gnews.io/api/v4/top-headlines?category=general&lang=en&apikey=ff18467843face6da195189500c10392";
+            const url =`https://gnews.io/api/v4/top-headlines?category=${selectedCategory}&lang=en&apikey=ff18467843face6da195189500c10392`;
             const response = await axios.get(url)
             
 
@@ -45,6 +46,10 @@ const News = () => {
         // fetchNews()
     },[selectedCategory])
 
+    const handleCategoryClick = (e,category) => {
+        e.preventDefault()
+        setSelectedCategory(category)
+    }
 
     return (
         <div className='news-app'>
@@ -57,15 +62,17 @@ const News = () => {
                         Categories
                     </h1>
                     <div className="Categories">
-                        <a href="" className="nav-link">General</a>
-                        <a href="" className="nav-link">World</a>
-                        <a href="" className="nav-link">business</a>
-                        <a href="" className="nav-link">Technology</a>
-                        <a href="" className="nav-link">Entertainment</a>
-                        <a href="" className="nav-link">Sports</a>
-                        <a href="" className="nav-link">Science</a>
-                        <a href="" className="nav-link">Health</a>
-                        <a href="" className="nav-link">Nation</a>
+                    {Categories.map((category)=>(
+
+                        <a 
+                        href="" 
+                        className="nav-link"
+                        key={category}
+                        onClick={(e)=>handleCategoryClick(e,category)}
+                        >
+                            {category}</a>
+                    ))}
+                       
                     </div>
                 </nav>
                 <div className="news-section">
@@ -87,6 +94,7 @@ const News = () => {
                     ))}   
                     </div>
                 </div>
+                <NewsModelBox/>
             </div>
             <footer>
                 <p className="copyright">
