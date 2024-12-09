@@ -3,21 +3,41 @@ import demoImg from '../assets/images/demo.jpg'
 import './NewsModelBox.css'
 
 
-const NewsModelBox = () => {
+const NewsModelBox = ({ show, article, onClose }) => {
+  if (!show) {
+    return null
+  }
   return (
     <div className='model-overlay'>
-        <div className="model-content">
-            <span className="close-button">
-                <i className='fa solid fa-xmark'></i>
-            </span>
-            <img src={demoImg} alt="Model-image" className='model-image' />
-            <h2 className='modal-title'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, ipsum.</h2>
-            <p className="model-source">source : the Guardian</p>
-            <p className="model-date">June 28, 2024, 09:47 PM</p>
-            <p className="model-content">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel vero minima earum. Et est accusantium aut, dolores harum repudiandae eaque earum ratione facere. Voluptatum tenetur ipsum illo molestiae, eum maiores necessitatibus omnis atque! Maxime, voluptatibus.</p>
-            <a href="" className='read-more-link'>Read more</a>
-        </div>
-        </div>
+      <div className="model-content">
+        <span className="close-button" onClick={onClose}>
+          <i className='fa solid fa-xmark'></i>
+        </span>
+        {article && (
+          <>
+            <img src={article.image} alt={article.title} className='model-image' />
+            <h2 className='modal-title'>{article.title}</h2>
+            <p className="model-source">source : {article.source.name}</p>
+            <p className="model-date">
+              {new Date(article.publishedAt).toLocaleString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
+            </p>
+            <p className="model-content-text">{article.content}</p>
+            <a 
+            href={article.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className='read-more-link'>Read more</a>
+          </>
+        )}
+
+      </div>
+    </div>
   )
 }
 

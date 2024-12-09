@@ -157,3 +157,79 @@ footer{
     font-family: "Bebas Neue", sans-serif;
     font-size: 2rem;
   }
+
+  @media (max-width: 1350px){
+    .news-app{
+        height: 90vh;
+    }
+    .logo{
+        font-size: 3.5rem;
+    }
+    .Categories{
+        row-gap: 2rem;
+    }
+    .news-section{
+         overflow: hidden;
+    }
+    .news-grid{
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        overflow-y: scroll;
+    }
+    .news-grid::-webkit-scrollbar{
+        display: none;
+    }
+  }
+  @media (max-width: 900px){
+
+    .logo{
+        font-size: 2.5rem;
+    }
+    .news-content{
+        flex-direction: column;
+        width: 100%;
+        row-gap: 2rem;
+        height: 80%;
+    }
+    .navbar{
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        height: 20rem;
+    }
+    /* .news-grid{
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+    } */
+    .Categories{
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center
+    }
+    .news-section{
+        width: 100%;
+    }
+    .nav-link{
+        margin-right: 2rem;
+    }
+  }
+
+  @media (max-width: 500px){
+    .navbar{
+        height: 20rem;
+    }
+    .headline-title{
+        font-size: 2rem;
+    }
+    .news-grid{
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+    }
+    footer{
+        min-height: 8rem;
+        flex-direction: column;
+        justify-content: center;
+        row-gap: 1rem;
+    }
+  }

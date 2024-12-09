@@ -27,3 +27,15 @@ html {
   place-items: center;
 }
 
+/* @media (min-width: 900px){
+  .container{
+    height: 200vh;
+  }
+} */
+
+@media (max-width: 500px){
+  html{
+      font-size: 55%;
+  }
+}
+

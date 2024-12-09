@@ -23,6 +23,10 @@ const News = () => {
 
     const [selectedCategory, setSelectedCategory]= useState ('General')
 
+    const [showModel, setShowModel]= useState(false)
+    const [selectedArticle, setSelectedArticle]= useState(null)
+
+
     useEffect(()=>{
         const fetchNews = async () => {
             const url =`https://gnews.io/api/v4/top-headlines?category=${selectedCategory}&lang=en&apikey=ff18467843face6da195189500c10392`;
@@ -43,12 +47,20 @@ const News = () => {
 
         
 
-        // fetchNews()
+        fetchNews()
     },[selectedCategory])
 
     const handleCategoryClick = (e,category) => {
         e.preventDefault()
         setSelectedCategory(category)
+    }
+
+    const handleArticleClick = (article) =>{
+        setSelectedArticle(article)
+        setShowModel(true)
+
+        console.log(article)
+
     }
 
     return (
@@ -77,7 +89,7 @@ const News = () => {
                 </nav>
                 <div className="news-section">
                     {headline && (
-                        <div className="headline">
+                        <div className="headline" onClick={()=>handleArticleClick(headline)}>
                         <img src={headline.image || noImg} alt={headline.title} />
                         <h2 className="headline-title">
                         {headline.title}</h2>
@@ -87,14 +99,14 @@ const News = () => {
                     <div className="news-grid">
                     {news.map((article, index)=>(
 
-                        <div className="news-grid-item" key={index}>
+                        <div className="news-grid-item" key={index} onClick={()=>handleArticleClick(article)}>
                             <img src={article.image || noImg} alt={article.title} />
                             <h3>{article.title}</h3>
                         </div>
                     ))}   
                     </div>
                 </div>
-                <NewsModelBox/>
+                <NewsModelBox show={showModel} article={selectedArticle} onClose={()=>setShowModel(false)}/>
             </div>
             <footer>
                 <p className="copyright">
